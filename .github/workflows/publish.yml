@@ -49,7 +49,7 @@ jobs:
         env:
           hangarApiKey: ${{ secrets.HANGAR_TOKEN }}
           hangarChangelog: ${{ github.event.release.body }}
-          instantrestockVersion: ${{ env.VERSION }}
+          stackableCuringVersion: ${{ env.VERSION }}
 
         # Attach output to release
       - name: Attach artifact to release
