@@ -1,7 +1,7 @@
 {
   // Schema adds autocomplete to this file, do not touch
 
-  "$schema": "https://raw.githubusercontent.com/spartacus04/VillagerStackableCuring/master/configSchema.json",
+  "$schema": "https://raw.githubusercontent.com/spartacus04/StackableCuring/master/configSchema.json",
 
   //Disables infinite trades for certain types of villagers.
   //Accepted Values are:

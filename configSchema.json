@@ -2,12 +2,6 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "maxTrades": {
-      "type": "integer"
-    },
-    "disablePricePenalty": {
-      "type": "boolean"
-    },
     "villagerBlacklist": {
       "type": "array",
       "items": {
@@ -31,18 +25,12 @@
         ]
       }
     },
-    "allowTravellingMerchants": {
-      "type": "boolean"
-    },
     "uninstallMode": {
       "type": "boolean"
     }
   },
   "required": [
-    "maxTrades",
-    "disablePricePenalty",
     "villagerBlacklist",
-    "allowTravellingMerchants",
     "uninstallMode"
   ]
 }

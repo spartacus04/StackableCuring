@@ -11,7 +11,7 @@ internal class Updater(private val plugin: JavaPlugin) {
     fun getVersion(consumer: (String) -> Unit) {
         UniversalScheduler.getScheduler(plugin).runTaskAsynchronously {
             try {
-                val reader = BufferedReader(InputStreamReader(URL("https://api.github.com/repos/spartacus04/VillagerStackableCuring/releases/latest").openStream()))
+                val reader = BufferedReader(InputStreamReader(URL("https://api.github.com/repos/spartacus04/StackableCuring/releases/latest").openStream()))
                 val text = reader.use {
                     it.readText()
                 }
