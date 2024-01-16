@@ -3,12 +3,12 @@
 [![Build](https://github.com/spartacus04/StackableCuring/actions/workflows/gradle.yml/badge.svg)](https://github.com/spartacus04/StackableCuring/actions/workflows/gradle.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/spartacus04/stackablecuring/badge)](https://www.codefactor.io/repository/github/spartacus04/stackablecuring)
 
-![bStats Players](https://img.shields.io/bstats/players/16589)
-![bStats Servers](https://img.shields.io/bstats/servers/16589)
+![bStats Players](https://img.shields.io/bstats/players/20757)
+![bStats Servers](https://img.shields.io/bstats/servers/20757)
 
 ![Spigot Downloads](https://img.shields.io/spiget/downloads/88098?label=Spigot%20Downloads)
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhangar.papermc.io%2Fapi%2Fv1%2Fprojects%2FInfiniteVillagerTrades&query=%24.stats.downloads&label=Hangar%20Downloads&color=download)
-![Modrinth Downloads](https://img.shields.io/modrinth/dt/7pdfxYHV?label=Modrinth%20downloads&color=00cc00)
+![Hangar Downloads](https://img.shields.io/hangar/dt/StackableCuring)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/Fsy9NpXv?label=Modrinth%20downloads&color=00cc00)
 ![GitHub all releases](https://img.shields.io/github/downloads/spartacus04/stackablecuring/total?label=Github%20downloads)
 
 >A spigot plugin to restore the old villager curing behavior.
