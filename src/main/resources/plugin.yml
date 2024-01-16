@@ -1,0 +1,27 @@
+name: VillagerStackableCuring
+version: ${version}
+author: spartacus04
+main: me.spartacus04.stackablecuring.StackableCuring
+api-version: 1.14
+description: plugin to allow villagers to have infinite trades
+depend: [NBTAPI]
+folia-supported: true
+
+commands:
+  stackablecuring:
+    description: Main command of the plugin
+    usage: /stackablecuring
+    aliases:
+      - stackablevillagercuring
+
+permissions:
+  stackablecuring.*:
+    children:
+      - stackablecuring.reload
+      - stackablecuring.config
+  stackablecuring.reload:
+    description: Allows the player to reload the plugin
+    default: op
+  stackablecuring.config:
+    description: Allows the player to edit the config
+    default: op
