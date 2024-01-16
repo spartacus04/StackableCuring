@@ -35,14 +35,14 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew proguardJar
         env:
-          instantrestockVersion: ${{ env.VERSION }}
+          stackableCuringVersion: ${{ env.VERSION }}
 
       - name: Publish to Modrinth
         run: ./gradlew modrinth
         env:
           modrinthApiKey: ${{ secrets.MODRINTH_TOKEN }}
           modrinthChangelog: ${{ github.event.release.body }}
-          instantrestockVersion: ${{ env.VERSION }}
+          stackableCuringVersion: ${{ env.VERSION }}
 
       - name: Publish to Hangar
         run: ./gradlew publishPluginPublicationToHangar
