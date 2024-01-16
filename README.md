@@ -17,6 +17,10 @@
 
 The **StackableCuring** plugin is designed to restore the old villager curing behavior where the discounts would stack with each cure. This was fixed in Minecraft 1.20.1 with [MC-181190](https://bugs.mojang.com/browse/MC-181190). The fix was extremely controversial in the minecraft community, as such this plugin was created to restore the old behavior. 
 
+## Dependencies
+
+- NTB-API ([Spigot](https://www.spigotmc.org/resources/nbt-api.7939/)-[Hangar](https://hangar.papermc.io/tr7zw/NBTAPI)-[Modrinth](https://modrinth.com/plugin/nbtapi)-[Github](https://github.com/tr7zw/Item-NBT-API))
+
 ## Features
 
 - **Villager Blacklist**: Add, remove, or list villagers in the blacklist using the `/stackablecuring config villagerBlacklist <add/remove/list> <villagertype>` command.
