@@ -8,7 +8,7 @@
 
 ![Spigot Downloads](https://img.shields.io/spiget/downloads/88098?label=Spigot%20Downloads)
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhangar.papermc.io%2Fapi%2Fv1%2Fprojects%2FInfiniteVillagerTrades&query=%24.stats.downloads&label=Hangar%20Downloads&color=download)
-![Modrinth Downloads](https://img.shields.io/modrinth/dt/7pdfxYHV?label=Modrinth%20downloads&color=00cc00)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/Fsy9NpXv?label=Modrinth%20downloads&color=00cc00)
 ![GitHub all releases](https://img.shields.io/github/downloads/spartacus04/stackablecuring/total?label=Github%20downloads)
 
 >A spigot plugin to restore the old villager curing behavior.
