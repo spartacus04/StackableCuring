@@ -6,7 +6,7 @@
 ![bStats Players](https://img.shields.io/bstats/players/20757)
 ![bStats Servers](https://img.shields.io/bstats/servers/20757)
 
-![Spigot Downloads](https://img.shields.io/spiget/downloads/88098?label=Spigot%20Downloads)
+![Spigot Downloads](https://img.shields.io/spiget/downloads/114543?label=Spigot%20Downloads)
 ![Hangar Downloads](https://img.shields.io/hangar/dt/StackableCuring?label=Hangar%20downloads)
 ![Modrinth Downloads](https://img.shields.io/modrinth/dt/Fsy9NpXv?label=Modrinth%20downloads&color=00cc00)
 ![GitHub all releases](https://img.shields.io/github/downloads/spartacus04/stackablecuring/total?label=Github%20downloads)
