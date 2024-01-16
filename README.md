@@ -1,4 +1,4 @@
-# Stackablecuring
+# StackableCuring
 
 [![Build](https://github.com/spartacus04/StackableCuring/actions/workflows/gradle.yml/badge.svg)](https://github.com/spartacus04/StackableCuring/actions/workflows/gradle.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/spartacus04/stackablecuring/badge)](https://www.codefactor.io/repository/github/spartacus04/stackablecuring)
