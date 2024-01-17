@@ -2,7 +2,7 @@ name: VillagerStackableCuring
 version: ${version}
 author: spartacus04
 main: me.spartacus04.stackablecuring.StackableCuring
-api-version: 1.14
+api-version: 1.20
 description: plugin to allow villagers to have infinite trades
 depend: [NBTAPI]
 folia-supported: true
