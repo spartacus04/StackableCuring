@@ -46,7 +46,7 @@ dependencies {
     implementation("com.github.Anon8281:UniversalScheduler:0.1.6")
 }
 
-group = "me.spartacus04.instantrestock"
+group = "me.spartacus04.stackablecuring"
 
 version = System.getenv("stackableCuringVersion") ?: "dev"
 
