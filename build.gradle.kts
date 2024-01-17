@@ -166,6 +166,10 @@ modrinth {
     gameVersions.set("${property("minecraft_versions")}".split(","))
     loaders.set("${property("modrinth_loaders")}".split(","))
 
+    dependencies {
+        required.project("nbtapi")
+    }
+
     changelog.set(modrinthChangelog)
 
     syncBodyFrom.set(rootProject.file("README.md").readText())
