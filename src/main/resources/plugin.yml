@@ -3,7 +3,7 @@ version: ${version}
 author: spartacus04
 main: me.spartacus04.stackablecuring.StackableCuring
 api-version: 1.20
-description: plugin to allow villagers to have infinite trades
+description: plugin to allow villagers to have stackable cures
 depend: [NBTAPI]
 folia-supported: true
 
