@@ -39,7 +39,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.14.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.bstats:bstats-bukkit:3.0.2")
