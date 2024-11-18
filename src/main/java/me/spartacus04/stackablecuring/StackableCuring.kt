@@ -28,11 +28,13 @@ class StackableCuring : JavaPlugin(), Listener {
         if(CONFIG.allowMetrics)
             Metrics(this, 20757)
 
-        Updater(this).getVersion {
-            if(it != description.version) {
-                Bukkit.getConsoleSender().sendMessage(
-                    "[§aStackableVillagerCuring§f] A new update is available!"
-                )
+        if(CONFIG.updateCheck) {
+            Updater(this).getVersion {
+                if(it != description.version) {
+                    Bukkit.getConsoleSender().sendMessage(
+                        "[§aStackableVillagerCuring§f] A new update is available!"
+                    )
+                }
             }
         }
     }
