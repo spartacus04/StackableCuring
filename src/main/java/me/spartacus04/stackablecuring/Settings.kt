@@ -8,11 +8,13 @@ import org.bukkit.plugin.java.JavaPlugin
  *
  * @property villagerBlacklist The list of blacklisted villagers.
  * @property uninstallMode Indicates if the uninstall mode is enabled.
+ * @property updateCheck Indicates if checking for updates is enabled.
  * @property allowMetrics Indicates if metrics are allowed.
  */
 data class Settings(
     var villagerBlacklist: ArrayList<String> = ArrayList(),
     var uninstallMode: Boolean = false,
+    var updateCheck: Boolean = true,
     var allowMetrics: Boolean = true
 )
 

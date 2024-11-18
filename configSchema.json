@@ -27,10 +27,14 @@
     },
     "uninstallMode": {
       "type": "boolean"
+    },
+    "updateCheck": {
+      "type": "boolean"
     }
   },
   "required": [
     "villagerBlacklist",
-    "uninstallMode"
+    "uninstallMode",
+    "updateCheck"
   ]
 }
