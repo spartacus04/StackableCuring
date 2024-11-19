@@ -25,3 +25,6 @@ permissions:
   stackablecuring.config:
     description: Allows the player to edit the config
     default: op
+  stackablecuring.notifyupdate:
+    description: Notifies the player when a new version is available
+    default: op

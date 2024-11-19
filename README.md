@@ -15,7 +15,7 @@
 
 ## Overview
 
-The **StackableCuring** plugin is designed to restore the old villager curing behavior where the discounts would stack with each cure. This was fixed in Minecraft 1.20.1 with [MC-181190](https://bugs.mojang.com/browse/MC-181190). The fix was extremely controversial in the minecraft community, as such this plugin was created to restore the old behavior. 
+The **StackableCuring** plugin is designed to restore the old villager curing behavior where the discounts would stack with each cure. This was fixed in Minecraft 1.20.2 with [MC-181190](https://bugs.mojang.com/browse/MC-181190). The fix was extremely controversial in the minecraft community, as such this plugin was created to restore the old behavior. 
 
 ## Dependencies
 

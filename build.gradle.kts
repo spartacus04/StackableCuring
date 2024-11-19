@@ -1,7 +1,6 @@
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import proguard.gradle.ProGuardTask
-import io.papermc.hangarpublishplugin.model.Platforms
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -39,12 +38,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.21.3-R0.1-SNAPSHOT")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.14.0")
+    compileOnly("org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.bstats:bstats-bukkit:3.1.0")
-    implementation("com.github.Anon8281:UniversalScheduler:0.1.6")
+    implementation("com.github.spartacus04:colosseum:c80e67f186")
 }
 
 group = "me.spartacus04.stackablecuring"
@@ -65,7 +64,7 @@ tasks.shadowJar {
     relocate("org/intellij/lang", "${dependencyPackage}.lang")
     relocate("org/jetbrains/annotations", "${dependencyPackage}.annotations")
     relocate("org/bstats", "${dependencyPackage}.bstats")
-    relocate("com/github/Anon8281/universalScheduler", "${dependencyPackage}.universalScheduler")
+    relocate("me/github/spartacus04/colosseum", "${dependencyPackage}.colosseum")
     exclude("ScopeJVMKt.class")
     exclude("DebugProbesKt.bin")
     exclude("META-INF/**")
@@ -138,11 +137,11 @@ hangarPublish {
         apiKey.set(hangarApiKey)
 
         platforms {
-            register(Platforms.PAPER) {
-                jar.set(tasks.shadowJar.flatMap { it.archiveFile })
+            paper {
+                url.set("${property("modrinth_url")}")
                 platformVersions.set("${property("minecraft_versions")}".split(","))
 
-                this.dependencies {
+                dependencies {
                     hangar("NBTAPI") {
                         required.set(true)
                     }
@@ -161,7 +160,7 @@ modrinth {
     projectId.set("${property("modrinth_projectId")}")
     versionNumber.set(rootProject.version.toString())
     versionType.set("${property("modrinth_channel")}")
-    uploadFile.set(tasks.shadowJar.flatMap { it.archiveFile })
+    uploadFile.set(tasks.getByName("proguardJar").outputs.files.singleFile)
     gameVersions.set("${property("minecraft_versions")}".split(","))
     loaders.set("${property("modrinth_loaders")}".split(","))
 

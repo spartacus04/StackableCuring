@@ -1,68 +1,81 @@
-package me.spartacus04.stackablecuring
+package me.spartacus04.stackablecuring.commands
 
-import me.spartacus04.stackablecuring.SettingsContainer.Companion.CONFIG
-import me.spartacus04.stackablecuring.SettingsContainer.Companion.saveConfig
-import me.spartacus04.stackablecuring.SettingsContainer.Companion.villagerList
+import me.spartacus04.stackablecuring.StackableCuringState.CONFIG
+import me.spartacus04.stackablecuring.StackableCuringState.LOGGER
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
-import org.bukkit.plugin.java.JavaPlugin
 
-internal class MainCommand(private val plugin : JavaPlugin) : CommandExecutor, TabCompleter {
+internal class MainCommand : CommandExecutor, TabCompleter {
+    private val villagerList = listOf(
+        "ARMORER", "BUTCHER", "CARTOGRAPHER", "CLERIC", "FARMER", "FISHERMAN",
+        "FLETCHER", "LEATHERWORKER", "LIBRARIAN", "MASON", "SHEPHERD", "TOOLSMITH",
+        "WEAPONSMITH"
+    )
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         try {
             when(args[0]) {
                 "reload" -> {
                     if(sender.hasPermission("stackablecuring.reload")) {
-                        sender.sendMessage("§aReloading Instantrestock...")
-                        SettingsContainer.reloadConfig(plugin)
-                        sender.sendMessage("§aReloaded!")
+                        sender.sendMessage(
+                            LOGGER.messageFormatter.info("Reloading StackableCuring...")
+                        )
+                        CONFIG.read()
+
+                        sender.sendMessage(
+                            LOGGER.messageFormatter.confirm("Reloaded StackableCuring!")
+                        )
                     } else {
-                        sender.sendMessage("§cYou don't have permission to do that!")
+                        sender.sendMessage(
+                            LOGGER.messageFormatter.error("You don't have permission to do that!")
+                        )
                     }
                 }
                 "config" -> {
                     if(sender.hasPermission("stackablecuring.config")) {
                         when(args[1]) {
                             "uninstallMode" -> {
-                                CONFIG.uninstallMode = args[2].lowercase().toBooleanStrict()
-                                saveConfig(plugin)
+                                CONFIG.UNINSTALL_MODE = args[2].lowercase().toBooleanStrict()
+                                CONFIG.save()
 
-                                sender.sendMessage("§aSet uninstallMode to ${args[2]}")
+                                sender.sendMessage(
+                                    LOGGER.messageFormatter.confirm("Set uninstallMode to ${args[2]}")
+                                )
                             }
                             "villagerBlacklist" -> {
                                 when(args[2]) {
                                     "add" -> {
-                                        if(villagerList.contains(args[3].uppercase()) && !CONFIG.villagerBlacklist.contains(args[3].uppercase())) {
-                                            CONFIG.villagerBlacklist.add(args[3].uppercase())
-                                            saveConfig(plugin)
-
-                                            sender.sendMessage("§aAdded ${args[3].uppercase()} to the blacklist")
+                                        if(villagerList.contains(args[3].uppercase()) && !CONFIG.VILLAGER_BLACKLIST.contains(args[3].uppercase())) {
+                                            CONFIG.VILLAGER_BLACKLIST.add(args[3].uppercase())
+                                            CONFIG.save()
                                         }
                                     }
                                     "remove" -> {
-                                        if(villagerList.contains(args[3].uppercase()) && CONFIG.villagerBlacklist.contains(args[3].uppercase())) {
-                                            CONFIG.villagerBlacklist.remove(args[3].uppercase())
-                                            saveConfig(plugin)
-
-                                            sender.sendMessage("§aRemoved ${args[3].uppercase()} from the blacklist")
+                                        if(villagerList.contains(args[3].uppercase()) && CONFIG.VILLAGER_BLACKLIST.contains(args[3].uppercase())) {
+                                            CONFIG.VILLAGER_BLACKLIST.remove(args[3].uppercase())
+                                            CONFIG.save()
                                         }
                                     }
                                     "list" -> {
-                                        sender.sendMessage(CONFIG.villagerBlacklist.joinToString { ", " })
+                                        sender.sendMessage(CONFIG.VILLAGER_BLACKLIST.joinToString { ", " })
                                     }
                                 }
                             }
                         }
                     } else {
-                        sender.sendMessage("§cYou don't have permission to do that!")
+                        sender.sendMessage(
+                            LOGGER.messageFormatter.error("You don't have permission to do that!")
+                        )
                     }
                 }
             }
         }
         catch (_: Exception) {
-            sender.sendMessage("§cInvalid value")
+            sender.sendMessage(
+                LOGGER.messageFormatter.error("Invalid command usage!")
+            )
         }
 
         return true
