@@ -2,6 +2,7 @@ package me.spartacus04.stackablecuring
 
 import com.github.Anon8281.universalScheduler.UniversalScheduler
 import de.tr7zw.nbtapi.NBT
+import de.tr7zw.nbtapi.NBTCompoundList
 import de.tr7zw.nbtapi.NBTEntity
 import me.spartacus04.stackablecuring.SettingsContainer.Companion.CONFIG
 import org.bstats.bukkit.Metrics
@@ -63,12 +64,12 @@ class StackableCuring : JavaPlugin(), Listener {
         val villager = e.entity as? ZombieVillager ?: return
         val curedVillager = e.transformedEntity as? Villager ?: return
 
-        if(villager.villagerProfession?.name in CONFIG.villagerBlacklist) return
+        if(getProfessionKey(villager).uppercase() in CONFIG.villagerBlacklist) return
 
         UniversalScheduler.getScheduler(this).runTaskLater({
-            val nbtzombie = NBTEntity(villager)
-            val oldGossips = nbtzombie.getCompoundList("Gossips")
-
+            val oldGossips = NBT.get<NBTCompoundList>(villager) {
+                return@get it.getCompoundList("Gossips") as NBTCompoundList
+            }
 
             NBT.modify(curedVillager) {
                 val newGossips = it.getCompoundList("Gossips")
@@ -89,6 +90,20 @@ class StackableCuring : JavaPlugin(), Listener {
                 }
             }
         }, 1)
+    }
+
+    /**
+     * In API versions 1.20.6 and earlier, Villager.Profession is a class.
+     * In versions 1.21 and later, it is an interface.
+     * This method uses reflection to get the profession.key.key field of the villager.
+     * @param villager The villager to get the profession of.
+     * @return The profession name of the villager.
+     */
+    private fun getProfessionKey(villager: ZombieVillager): String {
+        val profession = villager::class.java.getMethod("getProfession").invoke(villager)
+        val key = profession::class.java.getMethod("getKey").invoke(profession)
+        val keyKey = key::class.java.getMethod("getKey").invoke(key)
+        return keyKey.toString()
     }
 }
 
