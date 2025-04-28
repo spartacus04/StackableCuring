@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import proguard.gradle.ProGuardTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -8,7 +6,7 @@ plugins {
     kotlin("jvm") version "2.1.20"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 
-    id("org.jetbrains.dokka") version "1.9.10"
+    id("org.jetbrains.dokka") version "2.0.0"
 
     `maven-publish`
     id("io.papermc.hangar-publish-plugin") version "0.1.3"
@@ -20,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:1.9.10")
+        classpath("org.jetbrains.dokka:dokka-base:2.0.0")
         classpath("com.guardsquare:proguard-gradle:7.7.0") {
             exclude("com.android.tools.build")
         }
@@ -96,17 +94,17 @@ tasks.processResources {
 
 // publish
 
-tasks.dokkaHtml {
-    val githubTag = System.getenv("githubTag")
+dokka {
+    pluginsConfiguration.html {
+        val githubTag = System.getenv("githubTag")
 
-    if(githubTag != null) {
-        version = "$version - $githubTag"
-    }
+        if(githubTag != null) {
+            version = "$version - $githubTag"
+        }
 
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        customStyleSheets = listOf(file("docsAssets/logo-styles.css"))
-        customAssets = listOf(file("icon.webp"))
-        footerMessage = "Villager Stackable Curing is licensed under the <a href=\"https://github.com/spartacus04/VillagerStackableCuring/blob/master/LICENSE.MD\">MIT</a> License."
+        customStyleSheets.from(file("docsAssets/logo-styles.css"))
+        customAssets.from(file("icon.webp"))
+        footerMessage = "StackableCuring is licensed under the <a href=\"https://github.com/spartacus04/StackableCuring/blob/master/LICENSE.MD\">MIT</a> License."
     }
 }
 
