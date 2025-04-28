@@ -3,7 +3,6 @@ package me.spartacus04.stackablecuring
 import me.spartacus04.colosseum.utils.PluginUpdater
 import me.spartacus04.stackablecuring.StackableCuringState.CONFIG
 import me.spartacus04.stackablecuring.StackableCuringState.LOGGER
-import me.spartacus04.stackablecuring.StackableCuringState.PLUGIN
 import me.spartacus04.stackablecuring.StackableCuringState.VERSION
 import me.spartacus04.stackablecuring.commands.MainCommand
 import me.spartacus04.stackablecuring.listeners.PlayerJoinEvent
@@ -29,8 +28,8 @@ class StackableCuring : JavaPlugin(), Listener {
             Metrics(this, 20757)
 
         if(CONFIG.CHECK_UPDATE)
-            PluginUpdater(PLUGIN, "spartacus04/StackableCuring").getVersion {
-                if(it != PLUGIN.description.version) {
+            PluginUpdater(this, "spartacus04/StackableCuring").getVersion {
+                if(it != description.version) {
                     LOGGER.info("A new update is available!")
                     LOGGER.url("https://modrinth.com/plugin/stackablecuring")
                 }
