@@ -30,17 +30,14 @@ buildscript {
 repositories {
     mavenLocal()
     maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
-    maven { url = uri("https://repo.dmulloy2.net/nexus/repository/public/") }
     maven { url = uri("https://repo.maven.apache.org/maven2/") }
     maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
     maven { url = uri("https://jitpack.io") }
-    maven { url = uri("https://repo.codemc.org/repository/maven-public/")}
 }
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.0")
-    implementation("com.google.code.gson:gson:2.13.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.bstats:bstats-bukkit:3.1.0")
     implementation("com.github.spartacus04:colosseum:c80e67f186")
@@ -63,6 +60,7 @@ tasks.shadowJar {
     relocate("com/google/gson", "${dependencyPackage}.gson")
     relocate("org/intellij/lang", "${dependencyPackage}.lang")
     relocate("org/jetbrains/annotations", "${dependencyPackage}.annotations")
+    relocate("com/google/errorprone", "${dependencyPackage}.errorprone")
     relocate("org/bstats", "${dependencyPackage}.bstats")
     relocate("me/github/spartacus04/colosseum", "${dependencyPackage}.colosseum")
     exclude("ScopeJVMKt.class")
