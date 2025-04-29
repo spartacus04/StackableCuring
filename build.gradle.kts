@@ -39,7 +39,7 @@ dependencies {
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.bstats:bstats-bukkit:3.1.0")
-    implementation("com.github.spartacus04:colosseum:c80e67f186")
+    implementation("com.github.spartacus04:colosseum:1.0")
 }
 
 group = "me.spartacus04.stackablecuring"
