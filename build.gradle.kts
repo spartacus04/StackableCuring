@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.21.8-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.21.10-R0.1-SNAPSHOT")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.2")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.bstats:bstats-bukkit:3.1.0")
