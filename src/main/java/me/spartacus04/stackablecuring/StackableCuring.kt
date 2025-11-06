@@ -1,25 +1,31 @@
 package me.spartacus04.stackablecuring
 
-import me.spartacus04.colosseum.utils.PluginUpdater
-import me.spartacus04.stackablecuring.StackableCuringState.CONFIG
-import me.spartacus04.stackablecuring.StackableCuringState.LOGGER
-import me.spartacus04.stackablecuring.StackableCuringState.VERSION
+import me.spartacus04.colosseum.ColosseumPlugin
+import me.spartacus04.colosseum.config.FileBind
 import me.spartacus04.stackablecuring.commands.MainCommand
+import me.spartacus04.stackablecuring.config.Config
 import me.spartacus04.stackablecuring.listeners.PlayerJoinEvent
 import me.spartacus04.stackablecuring.listeners.VillagerEvent
 import org.bstats.bukkit.Metrics
-import org.bukkit.event.Listener
-import org.bukkit.plugin.java.JavaPlugin
 
 @Suppress("unused")
-class StackableCuring : JavaPlugin(), Listener {
+class StackableCuring : ColosseumPlugin() {
     override fun onEnable() {
-        if(VERSION < "1.20.2") {
-            LOGGER.warn("This plugin is unnecessary on versions prior to 1.20.2, as such it will be disabled.")
+        if(serverVersion < "1.20.2") {
+            colosseumLogger.warn("This plugin is unnecessary on versions prior to 1.20.2, as such it will be disabled.")
             server.pluginManager.disablePlugin(this)
         }
 
-        getCommand("stackablecuring")!!.setExecutor(MainCommand())
+        INSTANCE = this
+
+        CONFIG = run {
+            if (!dataFolder.exists()) dataFolder.mkdirs()
+            FileBind.create(Config::class.java)
+        }
+
+        registerCommands {
+            addCommand(MainCommand::class.java)
+        }
 
         VillagerEvent(this).register()
         PlayerJoinEvent(this).register()
@@ -28,14 +34,22 @@ class StackableCuring : JavaPlugin(), Listener {
             Metrics(this, 20757)
 
         if(CONFIG.CHECK_UPDATE)
-            PluginUpdater(this, "spartacus04/StackableCuring").getVersion {
+            checkForUpdates("spartacus04/StackableCuring") {
                 if(it != description.version) {
-                    LOGGER.info("A new update is available!")
-                    LOGGER.url("https://modrinth.com/plugin/stackablecuring")
+                    colosseumLogger.info("A new update is available!")
+                    colosseumLogger.url("https://modrinth.com/plugin/stackablecuring")
                 }
             }
 
-        LOGGER.confirm("Enabled StackableCuring")
+        colosseumLogger.confirm("Enabled StackableCuring")
+    }
+
+    override fun onDisable() {
+        colosseumLogger.warn("Disabled StackableCuring")
+    }
+
+    companion object {
+        lateinit var INSTANCE: StackableCuring
+        lateinit var CONFIG: Config
     }
 }
-

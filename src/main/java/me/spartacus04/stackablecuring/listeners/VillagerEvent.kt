@@ -2,9 +2,9 @@ package me.spartacus04.stackablecuring.listeners
 
 import de.tr7zw.nbtapi.NBT
 import de.tr7zw.nbtapi.NBTCompoundList
+import me.spartacus04.colosseum.ColosseumPlugin
 import me.spartacus04.colosseum.listeners.ColosseumListener
-import me.spartacus04.stackablecuring.StackableCuringState.CONFIG
-import me.spartacus04.stackablecuring.StackableCuringState.SCHEDULER
+import me.spartacus04.stackablecuring.StackableCuring.Companion.CONFIG
 import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Villager
@@ -12,9 +12,8 @@ import org.bukkit.entity.ZombieVillager
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityTransformEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
-import org.bukkit.plugin.java.JavaPlugin
 
-internal class VillagerEvent(plugin: JavaPlugin) : ColosseumListener(plugin) {
+internal class VillagerEvent(val plugin: ColosseumPlugin) : ColosseumListener(plugin) {
 
     // This event is called when a player right-clicks a villager
     // It's called when the uninstallMode is enabled
@@ -54,7 +53,7 @@ internal class VillagerEvent(plugin: JavaPlugin) : ColosseumListener(plugin) {
         // If the last major gossip value is 0, we don't need to do anything as the villager was never cured before
         if(lastMajorGossipValue == 0) return
 
-        SCHEDULER.runTaskLater({
+        plugin.scheduler.runTaskLater({
             NBT.modify(curedVillager) {
                 val gossips = it.getCompoundList("Gossips")
 
@@ -68,8 +67,8 @@ internal class VillagerEvent(plugin: JavaPlugin) : ColosseumListener(plugin) {
     }
 
     fun getMajorPositiveGossip(villager: Entity, offlinePlayer: OfflinePlayer): Int =
-         NBT.get<Int>(villager) {
-             val zombieGossips = it.getCompoundList("Gossips") as NBTCompoundList
+         NBT.get<Int>(villager) { nbt ->
+             val zombieGossips = nbt.getCompoundList("Gossips") as NBTCompoundList
 
              val majorGossip = zombieGossips.find {
                  it.getString("Type") == "major_positive" &&

@@ -3,7 +3,7 @@ package me.spartacus04.stackablecuring.config
 import com.google.gson.annotations.SerializedName
 import me.spartacus04.colosseum.config.ConfigField
 import me.spartacus04.colosseum.config.FileBind
-import me.spartacus04.stackablecuring.StackableCuringState.PLUGIN
+import me.spartacus04.stackablecuring.StackableCuring.Companion.INSTANCE
 
 /**
  * Represents the settings for the plugin.
@@ -13,6 +13,7 @@ import me.spartacus04.stackablecuring.StackableCuringState.PLUGIN
  * @property CHECK_UPDATE Indicates if checking for updates is enabled.
  * @property ALLOW_METRICS Indicates if metrics are allowed.
  */
+@Suppress("propertyName")
 data class Config(
     @ConfigField(
         "Villager Blacklist",
@@ -45,7 +46,7 @@ data class Config(
     )
     @SerializedName("allowMetrics")
     var ALLOW_METRICS: Boolean = true
-) : FileBind("config.json", Config::class.java, PLUGIN) {
+) : FileBind("config.json", Config::class.java, INSTANCE) {
     @Suppress("unused")
     @SerializedName("\$schema")
     private val schema = "https://raw.githubusercontent.com/spartacus04/StackableCuring/master/configSchema.json"

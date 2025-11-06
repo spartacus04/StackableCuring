@@ -4,9 +4,9 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     java
     kotlin("jvm") version "2.1.20"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "9.2.2"
 
-    id("org.jetbrains.dokka") version "2.0.0"
+    id("org.jetbrains.dokka") version "2.1.0"
 
     `maven-publish`
     id("io.papermc.hangar-publish-plugin") version "0.1.3"
@@ -18,8 +18,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:2.0.0")
-        classpath("com.guardsquare:proguard-gradle:7.7.0") {
+        classpath("org.jetbrains.dokka:dokka-base:2.1.0")
+        classpath("com.guardsquare:proguard-gradle:7.8.1") {
             exclude("com.android.tools.build")
         }
     }
@@ -35,11 +35,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.0")
+    compileOnly("org.spigotmc:spigot-api:1.21.10-R0.1-SNAPSHOT")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.3")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.bstats:bstats-bukkit:3.1.0")
-    implementation("com.github.spartacus04:colosseum:c80e67f186")
+    implementation("com.github.spartacus04:colosseum:1.1")
 }
 
 group = "me.spartacus04.stackablecuring"
@@ -61,7 +61,7 @@ tasks.shadowJar {
     relocate("org/jetbrains/annotations", "${dependencyPackage}.annotations")
     relocate("com/google/errorprone", "${dependencyPackage}.errorprone")
     relocate("org/bstats", "${dependencyPackage}.bstats")
-    relocate("me/github/spartacus04/colosseum", "${dependencyPackage}.colosseum")
+    relocate("me/spartacus04/colosseum", "${dependencyPackage}.colosseum")
     exclude("ScopeJVMKt.class")
     exclude("DebugProbesKt.bin")
     exclude("META-INF/**")
