@@ -38,7 +38,7 @@ dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.11-R0.2-SNAPSHOT")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.5")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("org.bstats:bstats-bukkit:3.1.0")
+    implementation("org.bstats:bstats-bukkit:3.2.1")
     implementation("com.github.spartacus04:colosseum:1.2")
 }
 
