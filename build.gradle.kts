@@ -1,6 +1,8 @@
+import groovy.json.JsonSlurper
 import proguard.gradle.ProGuardTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import xyz.jpenilla.runtask.task.AbstractRun
+import java.net.URL
 
 plugins {
     java
@@ -107,6 +109,17 @@ val lastSupportedVersion = "${property("minecraft_versions")}".split(",").last()
 
 tasks.runServer {
     minecraftVersion(lastSupportedVersion)
+
+    downloadPlugins {
+        // temp solution while runServer adds support for downloading latest
+        @Suppress("UNCHECKED_CAST")
+        val versions = JsonSlurper()
+            .parse(URL("https://api.modrinth.com/v2/project/nbtapi/version")) as List<Map<String, Any?>>
+
+        modrinth("nbtapi",
+            versions.firstOrNull()?.get("version_number") as? String ?: throw IllegalStateException("version_number is not defined"),
+        )
+    }
 }
 
 
