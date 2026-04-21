@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "2.3.20"
     id("com.gradleup.shadow") version "9.3.1"
 
-    id("org.jetbrains.dokka") version "2.1.0"
+    id("org.jetbrains.dokka") version "2.2.0"
 
     `maven-publish`
     id("io.papermc.hangar-publish-plugin") version "0.1.4"
@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:2.1.0")
+        classpath("org.jetbrains.dokka:dokka-base:2.2.0")
         classpath("com.guardsquare:proguard-gradle:7.8.2") {
             exclude("com.android.tools.build")
         }
