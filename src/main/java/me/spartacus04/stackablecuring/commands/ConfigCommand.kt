@@ -77,7 +77,7 @@ class ConfigCommand(plugin: ColosseumPlugin) : ColosseumNestedCommand(plugin, "c
     )) {}
 )) {
     override val commandData = commandDescriptor("config") {
-        permissions = setOf("stackablecuring.config")
+        permissions = hashSetOf("stackablecuring.config")
     }
 
     companion object {

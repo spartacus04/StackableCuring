@@ -1,5 +1,6 @@
 import proguard.gradle.ProGuardTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import xyz.jpenilla.runtask.task.AbstractRun
 
 plugins {
     java
@@ -11,6 +12,7 @@ plugins {
     `maven-publish`
     id("io.papermc.hangar-publish-plugin") version "0.1.4"
     id("com.modrinth.minotaur") version "2.9.0"
+    id("xyz.jpenilla.run-paper") version "3.0.2"
 }
 
 buildscript {
@@ -52,7 +54,7 @@ java.targetCompatibility = JavaVersion.VERSION_1_8
 
 tasks.shadowJar {
     archiveFileName.set("${rootProject.name}_${project.version}-shadowed.jar")
-    val dependencyPackage = "${rootProject.group}.dependencies.${rootProject.name.lowercase()}"
+    val dependencyPackage = "${rootProject.group}.dependencies"
     from(subprojects.map { it.sourceSets.main.get().output })
 
     relocate("kotlin", "${dependencyPackage}.kotlin")
@@ -92,6 +94,21 @@ tasks.processResources {
         expand("version" to project.rootProject.version)
     }
 }
+
+// Test
+
+tasks.withType(AbstractRun::class) {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+val lastSupportedVersion = "${property("minecraft_versions")}".split(",").last()
+
+tasks.runServer {
+    minecraftVersion(lastSupportedVersion)
+}
+
 
 // publish
 

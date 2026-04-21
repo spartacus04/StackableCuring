@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender
 class ReloadCommand(private val plugin: ColosseumPlugin) : ColosseumCommand(plugin) {
     override val commandData = commandDescriptor("reload") {
         description = "Reloads the plugin configuration"
-        permissions = setOf("stackablecuring.reload")
+        permissions = hashSetOf("stackablecuring.reload")
     }
 
     override fun execute(ctx: CommandContext<CommandSender>) {
