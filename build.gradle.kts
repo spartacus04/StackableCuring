@@ -40,7 +40,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:26.2-R0.1-SNAPSHOT")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.16.0")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.16.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.bstats:bstats-bukkit:3.2.1")
     implementation("com.github.spartacus04:colosseum:1.2.6")
