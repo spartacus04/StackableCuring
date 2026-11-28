@@ -36,7 +36,7 @@ internal class VillagerEvent(val plugin: ColosseumPlugin) : ColosseumListener(pl
 
     // This event is called when a zombie villager is cured
     // It handles the logic of adding the gossip to the cured villager
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     fun onVillagerTransformEvent(e: EntityTransformEvent) {
         if(CONFIG.UNINSTALL_MODE) return
         if(e.transformReason != EntityTransformEvent.TransformReason.CURED) return
@@ -49,11 +49,16 @@ internal class VillagerEvent(val plugin: ColosseumPlugin) : ColosseumListener(pl
 
 
         val lastMajorGossipValue = getMajorPositiveGossip(zombieVillager, player)
+        traceGossips("cured-event zombie previous=$lastMajorGossipValue", zombieVillager)
+        traceGossips("cured-event villager", curedVillager)
 
         // If the last major gossip value is 0, we don't need to do anything as the villager was never cured before
         if(lastMajorGossipValue == 0) return
 
-        plugin.scheduler.runTaskLater({
+        // Entity-bound scheduling follows the villager's owning region on Folia.
+        // Keep the delay so vanilla conversion/reputation processing finishes first.
+        plugin.scheduler.runTaskLater(curedVillager, {
+            traceGossips("before-write expected=${lastMajorGossipValue + 20}", curedVillager)
             NBT.modify(curedVillager) {
                 val gossips = it.getCompoundList("Gossips")
 
@@ -63,7 +68,19 @@ internal class VillagerEvent(val plugin: ColosseumPlugin) : ColosseumListener(pl
                     }
                 }
             }
+            traceGossips("after-write", curedVillager)
+            if (diagnostics) plugin.scheduler.runTaskLater(curedVillager, {
+                traceGossips("verify-after-20-ticks", curedVillager)
+            }, 20)
         }, 1)
+    }
+
+    private val diagnostics = java.lang.Boolean.getBoolean("stackablecuring.debug")
+
+    private fun traceGossips(phase: String, entity: Entity) {
+        if (!diagnostics) return
+        val gossips = NBT.get<String>(entity) { it.getCompoundList("Gossips").toString() }
+        plugin.logger.info("[CureTrace] $phase entity=${entity.uniqueId} thread=${Thread.currentThread().name} Gossips=$gossips")
     }
 
     fun getMajorPositiveGossip(villager: Entity, offlinePlayer: OfflinePlayer): Int =
