@@ -48,7 +48,7 @@ dependencies {
 
 group = "me.spartacus04.stackablecuring"
 
-version = System.getenv("stackableCuringVersion") ?: "dev"
+version = System.getenv("stackableCuringVersion") ?: "1.3.4-alpha"
 
 description = "StackableVillagerCuring"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
